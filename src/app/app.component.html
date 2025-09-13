@@ -1,0 +1,28 @@
+<div class="home">
+  <div class="sidebar">
+    <div class="logo-container">
+      <img src="assets/logo.png" alt="Logo" class="logo">
+      <h1 class="font_0 wixui-rich-text__text" style="font-size:9px; text-align:center; color: white;">
+        <span style="font-size:9px;" class="wixui-rich-text__text">CONSEIL - INFRASTRUCTURE - INTEGRATION DE SERVICES</span>
+      </h1>
+    </div>
+    <div class="nav-buttons">
+      <button *ngIf="isAdmin" class="btn-add" routerLink="/admin-dashboard">Dashboard Admin</button>
+      <button *ngIf="isEmployee" class="btn-add" routerLink="/employee-dashboard">Mon Espace</button>
+      <button *ngIf="isAdmin" class="btn-add" routerLink="/users">Utilisateurs</button>
+      <button *ngIf="isLoggedIn" class="btn-add" routerLink="/leave-requests">Demandes de congé</button>
+    </div>
+  </div>
+  
+  <div class="content">
+    <div class="top-bar">
+      <div class="auth-buttons">
+        <span *ngIf="isLoggedIn">Bienvenue, {{currentUser?.fullName || currentUser?.email}}!</span>
+        <button *ngIf="!isLoggedIn" class="btn-auth" routerLink="/auth/login">Se connecter</button>
+        <button *ngIf="!isLoggedIn" class="btn-auth" routerLink="/auth/register">Créer un compte</button>
+        <button *ngIf="isLoggedIn" class="btn-auth" (click)="logout()">Déconnexion</button>
+      </div>
+    </div>
+    <router-outlet />
+  </div>
+</div>

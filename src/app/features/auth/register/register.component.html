@@ -1,0 +1,45 @@
+<div class="auth-container">
+  <h2>Créer un compte</h2>
+  <p>Profitez de l’expérience complète en créant un compte. Tous les champs sont obligatoires.</p>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Nom complet</label>
+      <input type="text" formControlName="fullName" placeholder="Nom complet" />
+    </div>
+
+    <div class="form-group">
+      <label>Nouvelle adresse mail</label>
+      <input type="email" formControlName="email" placeholder=" Adresse email" />
+    </div>
+
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <input type="password" formControlName="password" placeholder="Mot de passe" />
+    </div>
+
+
+    <div class="form-group">
+      <label>confirmer le mot de passe</label>
+      <input type="password" formControlName="confirmPassword" placeholder="Confirmer le mot de passe" />
+    </div>
+
+    <div class="form-group">
+      <label>Date de naissance</label>
+      <input type="date" formControlName="birthDate" />
+    </div>
+
+    <div class="form-group">
+      <label>Rôle</label>
+      <select formControlName="role">
+        <option value="employee">Employé</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+
+
+    <button type="submit" [disabled]="registerForm.invalid">Suivant</button>
+  </form>
+
+  <p>Déjà un compte ? <a routerLink="/auth/login"> Se connecter </a></p>
+</div>

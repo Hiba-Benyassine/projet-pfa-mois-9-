@@ -1,0 +1,60 @@
+<div class="leave-request-list">
+  <div class="header">
+    <h2>Liste des demandes de congé</h2>
+    <button routerLink="/leave-requests/new" class="btn btn-primary">
+      Nouvelle demande
+    </button>
+  </div>
+
+  <!-- ✅ Validation / Success message -->
+  <div *ngIf="successMessage" class="alert alert-success mt-2">
+    ✅ La demande a été validée avec succès !
+  </div>
+
+  <div class="table-container mt-3">
+    <table class="leave-table table table-striped">
+      <thead>
+        <tr>
+          <th>Employé</th>
+          <th>Type</th>
+          <th>Début</th>
+          <th>Fin</th>
+          <th>Durée</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demande of demandes">
+          <td data-label="Employé">{{ getEmployeName(demande) }}</td>
+          <td data-label="Type">{{ getType(demande) }}</td>
+          <td data-label="Début">{{ getDebut(demande) }}</td>
+          <td data-label="Fin">{{ getFin(demande) }}</td>
+          <td data-label="Durée">{{ getDuree(demande) }} jour(s)</td>
+          <td data-label="Statut">{{ demande.status }}</td>
+          <td data-label="Actions">
+            <div class="action-buttons" *ngIf="canEditOrDelete(demande)">
+          <button
+            class="btn btn-sm"
+            [ngClass]="(demande.status === 'approved' || validIds.includes(demande.id)) ? 'btn-success' : 'btn-outline-success'"
+            [disabled]="demande.status === 'approved' || validIds.includes(demande.id)"
+            (click)="valiRequest(demande)">
+            Valider
+          </button>
+
+              <button class="btn btn-sm btn-danger" (click)="deleteRequest(demande.id)">
+                Supprimer
+              </button>
+            </div>
+          </td>
+        </tr>
+
+        <tr *ngIf="demandes.length === 0">
+          <td colspan="7" class="no-data text-center text-muted">
+            Aucune demande de congé trouvée
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

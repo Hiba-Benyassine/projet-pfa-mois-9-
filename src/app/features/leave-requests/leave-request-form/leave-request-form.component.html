@@ -1,0 +1,115 @@
+<div class="leave-request-form">
+  <h2>{{ isEditMode ? 'Modifier la demande de congé' : 'Nouvelle demande de congé' }}</h2>
+  
+  <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">Prénom de l'employé </label>
+        <input 
+          type="text" 
+          id="firstName" 
+          formControlName="firstName" 
+          class="form-control"
+          placeholder="Prénom"
+        >
+        <div *ngIf="leaveForm.get('firstName')?.invalid && leaveForm.get('firstName')?.touched" class="error">
+          Le prénom est requis
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Nom de l'employé </label>
+        <input 
+          type="text" 
+          id="lastName" 
+          formControlName="lastName" 
+          class="form-control"
+          placeholder="Nom"
+        >
+        <div *ngIf="leaveForm.get('lastName')?.invalid && leaveForm.get('lastName')?.touched" class="error">
+          Le nom est requis
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="leaveType">Type de congé </label>
+      <select id="leaveType" formControlName="leaveType" class="form-control">
+        <option value="">Sélectionnez un type</option>
+        <option *ngFor="let option of leaveTypeOptions" [value]="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+      <div *ngIf="leaveForm.get('leaveType')?.invalid && leaveForm.get('leaveType')?.touched" class="error">
+        Le type de congé est requis
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="startDate">Date de début </label>
+        <input type="date" id="startDate" formControlName="startDate" class="form-control">
+        <div *ngIf="leaveForm.get('startDate')?.invalid && leaveForm.get('startDate')?.touched" class="error">
+          La date de début est requise
+        </div>
+        <div *ngIf="leaveForm.get('startDate')?.hasError('invalidDates') && leaveForm.get('startDate')?.touched" class="error">
+          La date de début doit être antérieure à la date de fin.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="endDate">Date de fin </label>
+        <input type="date" id="endDate" formControlName="endDate" class="form-control">
+        <div *ngIf="leaveForm.get('endDate')?.invalid && leaveForm.get('endDate')?.touched" class="error">
+          La date de fin est requise
+        </div>
+        <div *ngIf="leaveForm.get('endDate')?.hasError('invalidDates') && leaveForm.get('endDate')?.touched" class="error">
+          La date de fin doit être postérieure à la date de début.
+        </div>
+      </div>
+    </div>
+    
+    <div class="duration-info" *ngIf="duration > 0">
+      <p>Durée: {{ duration }} jour(s)</p>
+    </div>
+    
+    <div *ngIf="leaveForm.hasError('invalidDuration')" class="error-duration">
+      {{ leaveForm.getError('invalidDuration') }}
+    </div>
+
+
+    
+
+    <div class="form-group">
+      <label>Contact d'urgence</label>
+      <div class="contact-group">
+        <input 
+          type="tel" 
+          id="emergencyPhone" 
+          formControlName="emergencyPhone" 
+          class="form-control"
+          placeholder="Numéro de téléphone">
+        <span class="or-separator">OU</span>
+        <input 
+          type="email" 
+          id="emergencyEmail" 
+          formControlName="emergencyEmail" 
+          class="form-control"
+          placeholder="Email">
+      </div>
+      <div *ngIf="leaveForm.hasError('oneRequired') && (leaveForm.get('emergencyPhone')?.touched || leaveForm.get('emergencyEmail')?.touched)" class="error">
+        Veuillez saisir au moins un contact (téléphone ou email).
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Annuler</button>
+      <button 
+        type="submit" 
+        class="btn btn-primary" 
+        [disabled]="leaveForm.invalid">
+        {{ isEditMode ? 'Modifier' : 'Soumettre' }}
+      </button>
+    </div>
+  </form>
+</div>

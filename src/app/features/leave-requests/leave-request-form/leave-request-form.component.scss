@@ -1,0 +1,247 @@
+/* Thème affiné: couleurs lisibles, espacement cohérent, séparateurs décoratifs */
+.leave-request-form {
+  /* Palette harmonisée (bleu ardoise) */
+  --surface-0: #1f2733;         /* fond profond (déjà dans ton thème) */
+  --surface-1: #222b39;         /* surface inputs */
+  --surface-2: rgba(255,255,255,0.06);
+  --border:    #455065;
+  --border-soft: #5b6780;
+  --text:      #e6edf3;
+  --muted:     #b8c2d4;
+  --placeholder: #9aa6bb;
+  --focus:     #4cc2ff;         /* cohérent avec #00aaff mais plus doux */
+  --accent:    #7aa2ff;         /* touche légère pour l’étoile */
+  --shadow:    0 10px 25px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
+
+  /* Système d’espacement/rayons unifié */
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.25rem;
+  --radius: 12px;
+
+  /* 🎯 Ajout du style pour le titre */
+  h2 {
+    text-align: center;     /* centre le texte */
+    color: #ffffff;         /* blanc pur */
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* pour le rendre lisible sur fond sombre */
+  }
+
+  /* Resserre subtilement l’intérieur du formulaire */
+  form {
+    padding: var(--space-3) var(--space-4);
+    border-color: var(--border);
+    background: var(--surface-2);
+  }
+
+  .form-row {
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-3);
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 0.35rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .error {
+      color: #e53e3e;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      animation: shake 0.5s ease-in-out;
+    }
+  }
+  
+  .error-duration {
+    color: #e53e3e;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background-color: rgba(229, 62, 62, 0.1);
+    border: 1px solid #e53e3e;
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .duration-info {
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: linear-gradient(135deg, #48bb78, #38a169);
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transform: translateZ(15px);
+    animation: pulse 2s infinite;
+
+    p {
+      margin: 0;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  /* Inputs: contraste net, tailles cohérentes */
+  .form-control {
+    height: 44px;
+    padding: 0.65rem 1rem;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border);
+    background: var(--surface-1);
+    color: var(--text);
+    transition: all 0.22s ease;
+
+    &::placeholder {
+      color: var(--placeholder);
+    }
+
+    &:hover {
+      border-color: var(--border-soft);
+      transform: translateZ(8px);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--focus);
+      box-shadow:
+        0 0 0 3px rgba(76, 194, 255, 0.25),
+        0 6px 18px rgba(76, 194, 255, 0.18);
+      transform: translateZ(10px) scale(1.01);
+    }
+  }
+
+  /* Contact d'urgence: alignement et espaces cohérents */
+  .contact-group {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    .form-control {
+      flex: 1 1 360px;
+      min-width: 0;
+    }
+
+    .or-separator {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.35rem 0.9rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      white-space: nowrap;
+      user-select: none;
+      position: relative;
+      box-shadow: var(--shadow);
+      transform: translateZ(10px);
+
+      &::before,
+      &::after {
+        content: "✦";
+        font-size: 0.75rem;
+        line-height: 1;
+        color: var(--accent);
+        filter: drop-shadow(0 0 6px rgba(122, 162, 255, 0.35));
+      }
+
+      span.line {
+        display: inline-block;
+        width: 18px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-soft), transparent);
+        opacity: 0.9;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-group {
+      flex-direction: column;
+      gap: var(--space-2);
+
+      .form-control {
+        width: 100%;
+        flex: 1 1 auto;
+      }
+
+      .or-separator {
+        width: 100%;
+        max-width: 240px;
+        margin: 0.25rem auto;
+        justify-content: center;
+      }
+    }
+  }
+
+  .section-divider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 var(--space-3);
+    color: var(--muted);
+    transform: translateZ(10px);
+
+    &::before,
+    &::after {
+      content: "";
+      flex: 1 1 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      border-radius: 1px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: var(--shadow);
+
+      .star {
+        color: var(--accent);
+        text-shadow: 0 0 6px rgba(122, 162, 255, 0.35);
+        animation: starTwinkle 2.6s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+@keyframes starTwinkle {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
+  50%      { transform: translateY(-1px) scale(1.05); opacity: 0.85; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}

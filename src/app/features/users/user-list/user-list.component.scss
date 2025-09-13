@@ -1,0 +1,163 @@
+/* Styles pour la page de liste des utilisateurs (même style que Leave Request) */
+.user-list-container {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: linear-gradient(135deg, #1d2b40 0%, #2a3a50 100%);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: white;
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .table-container {
+    background: #1e2a38;
+    /* Removed border-radius for square corners */
+    border-radius: 0;
+    overflow: hidden;
+    /* Simplified box-shadow for flatter look */
+    box-shadow: none;
+    transform: translateZ(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  .user-list {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    thead {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+
+      th {
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 16px;
+        text-align: left;
+        border: none;
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        background: #233140;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid #3b4a5c;
+
+        &:nth-child(even) {
+          background: #1d2a38;
+        }
+
+        &:hover {
+          background: linear-gradient(135deg, #2e4460 0%, #3b5070 100%);
+          transform: translateX(4px) translateZ(0);
+          box-shadow: inset 4px 0 0 #4facfe;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      td {
+        padding: 14px 16px;
+        color: #d1d8e0;
+        font-weight: 500;
+        border: none;
+        position: relative;
+
+        /* Removed left border gradient line */
+        &::before {
+          display: none;
+        }
+
+        &:hover::before {
+          height: 0;
+        }
+      }
+    }
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateZ(0);
+    margin-right: 6px;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-2px) translateZ(0);
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    &.btn-edit {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+    }
+
+    &.btn-delete {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+      color: white;
+    }
+  }
+}
+
+/* Animation pour les lignes */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.user-list tbody tr {
+  animation: slideIn 0.4s ease forwards;
+}
+
+.user-list tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.user-list tbody tr:nth-child(2) { animation-delay: 0.2s; }
+.user-list tbody tr:nth-child(3) { animation-delay: 0.3s; }
+.user-list tbody tr:nth-child(4) { animation-delay: 0.4s; }

@@ -1,0 +1,29 @@
+<div class="user-list-container">
+  <ng-container *ngIf="isAdmin; else notAllowed">
+    <div class="header">
+      <h2 class="section-title">Liste des Utilisateurs</h2>
+    </div>
+    <table class="user-list">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; let i = index">
+          <td data-label="Nom">{{ user.fullName }}</td>
+          <td data-label="Email">{{ user.email }}</td>
+          <td data-label="Actions">
+            <button class="btn-edit" (click)="editUser(user.email)">Modifier</button>
+            <button class="btn-delete" (click)="deleteUser(user.email)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #notAllowed>
+    <div class="access-denied">Accès refusé : seuls les administrateurs peuvent voir la liste des utilisateurs.</div>
+  </ng-template>
+</div>

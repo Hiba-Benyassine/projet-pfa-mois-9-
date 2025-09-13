@@ -1,0 +1,105 @@
+.auth-container {
+  width: 400px;
+  margin: 60px 130px;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.5); /* Arrière-plan du conteneur légèrement sombre et transparent */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(216, 204, 204, 0.15);
+  backdrop-filter: blur(8px); /* Ajoute un effet de flou en arrière-plan */
+  animation: fadeIn 1s ease-in-out; /* Animation d'apparition */
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff; /* Couleur du titre en blanc */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); /* Ajoute une légère lueur */
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    width: 380px;
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #ffffff; /* Couleur du texte du label en blanc */
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #5a5a5a; /* Bordure plus foncée */
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.15); /* Arrière-plan semi-transparent mais visible */
+      color: #ffffff; /* Couleur du texte du champ de saisie en blanc */
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7); /* Rendre le texte du placeholder plus visible */
+      }
+
+      &:focus {
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.3); /* Couleur plus claire lors de la sélection */
+        border-color: #0078d7; /* Couleur de la bordure lorsqu'il est en focus */
+      }
+    }
+  }
+
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(45deg, #0078d7, #5c6bc0); /* Dégradé de couleur */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 120, 215, 0.4); /* Ombre plus prononcée */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px); /* Bouton se soulève au survol */
+      box-shadow: 0 6px 20px rgba(0, 120, 215, 0.6); /* Ombre plus grande */
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px); /* Bouton s'enfonce au clic */
+    }
+  }
+
+  p {
+    text-align: center;
+    margin-top: 10px;
+    color: #ffffff; /* Couleur du texte en blanc */
+  }
+
+  p a {
+    color: #0096ff; /* Lien plus lumineux */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    &:hover {
+      color: #00c4ff; /* Changement de couleur au survol */
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Ajout de la règle d'animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

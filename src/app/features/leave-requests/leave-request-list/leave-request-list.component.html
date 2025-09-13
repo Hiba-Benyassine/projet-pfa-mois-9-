@@ -1,0 +1,44 @@
+<div class="leave-request-list">
+  <div class="header">
+    <h2>Liste des demandes de congé</h2>
+    <button routerLink="/leave-requests/new" class="btn btn-primary">
+      Nouvelle demande
+    </button>
+  </div>
+  <div class="table-container">
+    <table class="leave-table">
+      <thead>
+        <tr>
+          <th>Employé</th>
+          <th>Type</th>
+          <th>Début</th>
+          <th>Fin</th>
+          <th>Durée</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+  <tr *ngFor="let demande of demandes">
+    <td data-label="Employé">{{ getEmployeName(demande) }}</td>
+    <td data-label="Type">{{ getType(demande) }}</td>
+    <td data-label="Début">{{ getDebut(demande) }}</td>
+    <td data-label="Fin">{{ getFin(demande) }}</td>
+    <td data-label="Durée">{{ getDuree(demande) }} jour(s)</td>
+    <td data-label="Statut">{{ demande.status }}</td>
+    <td data-label="Actions">
+      <div class="action-buttons" *ngIf="canEditOrDelete(demande)">
+        <button [routerLink]="['/leave-requests/edit', demande.id]" class="btn btn-sm btn-edit">Modifier</button>
+        <button class="btn btn-sm btn-delete" (click)="deleteRequest(demande.id)">Supprimer</button>
+      </div>
+    </td>
+  </tr>
+        <tr *ngIf="demandes.length === 0">
+          <td colspan="7" class="no-data">
+            Aucune demande de congé trouvée
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
